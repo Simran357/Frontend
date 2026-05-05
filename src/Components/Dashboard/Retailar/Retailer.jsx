@@ -135,7 +135,7 @@ const Retailer = () => {
                     <span className='text-green-500'>
                       <TrendingUp />
                     </span>
-                    <h1 className='text-xl font-medium'>SALES TREND</h1>
+                    <h1 className='text-xl text-blue-500  font-medium'>SALES TREND</h1>
                   </div>
                   <div className='flex gap-2'>
                     <button className='rounded-xl px-2 bg-green-200 text-green-600 font-medium text-xs  hover:border-green-600 hover:shadow-md hover:bg-green-800 transition-all'> Sales</button>
