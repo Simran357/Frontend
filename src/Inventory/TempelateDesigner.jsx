@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from "react";
-import { useQuill } from "react-quilljs";
-import "quill/dist/quill.snow.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.snow.css";
 import {
   MessageSquare,
   Clock3,
@@ -25,25 +26,8 @@ Our logistics team is working to resolve this. Your new estimated delivery time 
 
 We apologize for the inconvenience.`);
 
-  const { quill, quillRef } = useQuill({
-    theme: "snow",
-    modules: {
-      toolbar: [
-        ["bold", "italic", "underline"],
-        ["link"],
-        [{ list: "ordered" }, { list: "bullet" }],
-        ["clean"],
-      ],
-    },
-  });
 
-  useEffect(() => {
-    if (quill) {
-      quill.on("text-change", () => {
-        setEmailBody(quill.root.innerHTML);
-      });
-    }
-  }, [quill]);
+
 
   return (
     <div className="min-h-screen bg-[#F3F5F4]">
@@ -82,13 +66,11 @@ We apologize for the inconvenience.`);
                 <Plus size={14} /> Add Variable
               </button>
             </div>
-
-            <textarea
-              value={whatsappText}
-              onChange={(e) => setWhatsappText(e.target.value)}
-              rows={12}
-              className="w-full rounded-xl border bg-[#EEF1EE] p-4 outline-none resize-none text-sm leading-7"
-            />
+<ReactQuill
+  theme="snow"
+  value={emailBody}
+  onChange={setEmailBody}
+/>
           </div>
 
           {/* BUTTONS */}
@@ -152,7 +134,7 @@ We apologize for the inconvenience.`);
                 <div className="bg-white rounded-2xl p-4 shadow max-w-[90%] text-sm leading-7 whitespace-pre-line">
                   {whatsappText}
                 </div>
-
+          
                 <div className="mt-4 space-y-2">
                   <button className="bg-white w-full rounded-xl py-3 border text-sm font-medium hover:bg-gray-50">
                     Track Order

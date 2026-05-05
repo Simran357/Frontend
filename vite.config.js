@@ -20,11 +20,10 @@ export default defineConfig({
           // UI Libraries
           'ui-libs': ['antd', 'lucide-react', 'react-icons', 'framer-motion', 'motion'],
           // Forms & Rich Text
-          'editors': ['quill', 'react-quilljs'],
-          // Heavy utilities
+'editors': ['quill', 'react-quill'],          // Heavy utilities
           'utils': ['tesseract.js', 'axios', 'jwt-decode'],
           // Other utilities
-          'misc': ['@react-oauth/google', 'react-toastify', 'cookie-parser'],
+          'misc': ['@react-oauth/google', 'react-toastify'],
         }
       }
     }
