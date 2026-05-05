@@ -252,7 +252,9 @@ const Retailer = () => {
                   <span className="font-semibold text-green-700">UPLOAD BILL</span>
                 </button>
                 {/* REPORT HUB */}
-                <button className="group rounded-2xl border border-green-200 bg-grey-50 p-4
+                <button 
+                 onClick={()=>navigate("ReturnInvoice")}
+                className="group rounded-2xl border border-green-200 bg-grey-50 p-4
       flex flex-col items-center justify-center
       hover:border-green-600 hover:shadow-lg hover:bg-green-50 transition-all"
                 >
