@@ -132,7 +132,7 @@ We apologize for the inconvenience.`);
         {/* CENTER PREVIEW */}
         <div className="flex justify-center items-center bg-[#EEF1EE] p-6">
 
-          <div className="w-[300px] h-[600px] rounded-3xl bg-black p-3 shadow-xl">
+          <div className="w-300px h-600px rounded-3xl bg-black p-3 shadow-xl">
             <div className="bg-[#0D6E63] h-full rounded-2xl p-4 text-white">
 
               <h3 className="mb-4 font-semibold">Preview</h3>
