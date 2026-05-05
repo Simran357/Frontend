@@ -35,7 +35,7 @@ import Addstock from './Components/Wholesalecompenent/Addstock'
 import InvoicePurchaseScan from './Components/Billing/InvoicePurchaseScan'
 import OrderSuccess from './Components/Billing/OrderSuccess'
 import OrdersOverview from './Components/Ordersoverview/Order'
-import DeliverySys from './Components/Delivery/deliverySys'
+import DeliverySys from './Components/Delivery/DeliverySys'
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css";
 import SingleOrder from './Components/Wholesalecompenent/SingleOrder'
