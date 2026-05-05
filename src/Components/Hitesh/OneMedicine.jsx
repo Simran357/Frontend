@@ -129,15 +129,14 @@ console.log("batches",batches)
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
           {/* SALES PLACEHOLDER */}
-          <div className="lg:col-span-2 bg-white p-6 rounded-xl border">
+          {/* <div className="lg:col-span-2 bg-white p-6 rounded-xl border">
             <h2 className="font-bold mb-2">Sales Trend</h2>
             <div className="h-160px flex items-center justify-center text-slate-400">
               Chart coming soon...
             </div>
-          </div>
+          </div> */}
 
-          {/* ALTERNATIVES */}
-          <div className="flex flex-col gap-3">
+          {/* <div className="flex flex-col gap-3">
             {alternatives.map((alt, i) => (
               <div key={i} className="bg-white p-4 border rounded-xl">
                 <div className="flex justify-between">
@@ -154,7 +153,7 @@ console.log("batches",batches)
                 </div>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
 
         {/*  TABLE */}
