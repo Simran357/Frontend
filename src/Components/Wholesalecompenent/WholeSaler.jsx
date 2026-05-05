@@ -201,27 +201,7 @@ const WholeSaler = () => {
         {/* <!-- BEGIN: Top Stats Row --> */}
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 cursor-pointer  gap-6">
           {/* <!-- Daily Sales --> */}
-          <div
-            onClick={() => navigate("Dailysales")}
-            className=' bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col hover:scale-100 justify-between hover:shadow-md transition-shadow'>
-            <div className="flex justify-between items-start">
-              <div >
-                <p className='font-medium text-slate-500'>Daily Sales</p>
-              </div>
-              <div className='bg-blue-50 rounded-lg p-2 text-lg  text-blue-600'>
-                ₹
-              </div>
-            </div>
-            <div className="mt-4">
-              <h2 className="text-3xl font-bold text-slate-800">
-                Rs {revenue.toLocaleString()}
-              </h2>              <span className="text-green-500 text-sm font-semibold flex items-center gap-1 mt-1">
-                +12.5% vs yesterday
-              </span>
-              <div className='mt-4'>
-              </div>
-            </div>
-          </div>
+        
           {/* <!-- Pending Orders --> */}
           <div
             onClick={() => navigate("PendingOrders")}
