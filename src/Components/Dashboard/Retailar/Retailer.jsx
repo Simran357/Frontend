@@ -215,14 +215,16 @@ const Retailer = () => {
               <span className='text-xs font-bold text-gray-400'>COMMAND CENTER  ACTIONS</span>
               <div className="grid grid-cols-2 gap-4 mt-4">
                 {/* NEW BILL */}
-                <button className="group rounded-2xl border border-green-200 bg-grey-50 p-4
+                <button 
+                 onClick={()=>navigate("RetailerOrderHistory")}
+                className="group rounded-2xl border border-green-200 bg-grey-50 p-4
       flex flex-col items-center justify-center 
       hover:border-green-600 hover:shadow-lg hover:bg-green-50 transition-all">
                   <div className="w-14 h-14 rounded-full  text-green-700
         flex items-center justify-center text-xl">
                     <ReceiptLong />
                   </div>
-                  <span className="font-semibold text-green-700">NEW BILL</span>
+                  <span className="font-semibold text-green-700">NEW Orders</span>
                   <span className="text-xs text-gray-500">(F1)</span>
                 </button>
                 {/* CREATE ORDER */}
@@ -238,14 +240,16 @@ const Retailer = () => {
                   </div>
                   <span className="font-semibold text-green-700">CREATE ORDER</span>
                 </button>
-                <button className="group rounded-2xl border border-green-200 bg-grey-50 p-4
+                <button
+                 onClick={()=>navigate("InvoicePurchaseScan")}
+                className="group rounded-2xl border border-green-200 bg-grey-50 p-4
       flex flex-col items-center justify-center  font-
       hover:border-green-600 hover:shadow-lg  hover:bg-green-50 transition-all">
                   <div className="w-14 h-14 rounded-full  text-green-700
         flex items-center justify-center text-xl">
                     <Upload />
                   </div>
-                  <span className="font-semibold text-green-700">UPLOAD PURCHASE</span>
+                  <span className="font-semibold text-green-700">UPLOAD BILL</span>
                 </button>
                 {/* REPORT HUB */}
                 <button className="group rounded-2xl border border-green-200 bg-grey-50 p-4
