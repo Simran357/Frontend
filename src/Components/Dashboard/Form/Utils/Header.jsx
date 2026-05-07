@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
     AppBar,
     Toolbar,
@@ -18,6 +18,8 @@ import MenuIcon from '@mui/icons-material/Menu'
 import SchoolIcon from '@mui/icons-material/School'
 import { useNavigate, useLocation } from 'react-router-dom'
 import UserProfileMenu from '../UserProfile'
+import axiosInstance from './AxiosInstance'
+import { contextProvide } from './Context/CommonContext'
 
 const Header = () => {
     const [open, setOpen] = useState(false)
@@ -34,7 +36,25 @@ const Header = () => {
         { text: 'Delivery', path: '/Dashboard/Wholesaler/Delivery'},
 
     ]
+      const [userData, setUserData] = useState(null);
+    
+      const { auth } = useContext(contextProvide);
+    
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const res = await axiosInstance.get(`/registerroute/getsingleWholesaler/${auth}`);
 
+        setUserData(res?.data?.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    if (auth) {
+      fetchUser();
+    } 
+  }, [auth]);
     const isActive = (path) => location.pathname.startsWith(path)
 
     const handleNavigate = (path) => {
@@ -120,8 +140,12 @@ const Header = () => {
 
                         {/* PROFILE MENU */}
                         <UserProfileMenu
-                            username="Wholesaler"
-                            role="Admin"
+                            username={
+                userData?.username ||
+                userData?.email ||
+                "User"
+              }
+              role={userData?.role || "Retailer"}
                         />
 
                     </Box>
