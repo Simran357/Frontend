@@ -24,10 +24,12 @@ const CreateUserForm = ({ setModel, getUser }) => {
     e.preventDefault();
     try {
       const res = await axiosInstance.post("/registerroute/createNewUser",formData);
-      if (res?.data?.success) {
-        alert(res.data.message);
+                 setModel(false)
+
+      if (res?.data) {
+        console.log(res?.data?.data);
         getUser(); // refresh table
-        setModel(false); // close modal
+     ; // close modal
       }
     } catch (error) {
       console.log("Error:", error);
@@ -42,12 +44,12 @@ const CreateUserForm = ({ setModel, getUser }) => {
       Add New User
     </div>
 
-    <form onSubmit={handleCreateUser} className="p-5 space-y-4">
+    <form className="p-5 space-y-4">
       <input name="username" placeholder="Full Name" onChange={handleChange}
         className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500"/>
       <input name="email" placeholder="Email" onChange={handleChange}
         className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500"/>
-      <input name="password" placeholder="Password" onChange={handleChange}
+      <input name="password" placeholder="Password"type="password"  onChange={handleChange}
         className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500"/>
       <input name="pharmacyName" placeholder="Pharmacy" onChange={handleChange}
         className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500"/>
@@ -73,7 +75,7 @@ const CreateUserForm = ({ setModel, getUser }) => {
           Cancel
         </button>
 
-        <button type="submit"
+        <button onClick={handleCreateUser}
           className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
           Create
         </button>
