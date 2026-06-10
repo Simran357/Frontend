@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create axios instance
 const axiosInstance = axios.create({
-baseURL: import.meta.env.VITE_API_URL,
+  baseURL: "https://backend-1-ni3c.onrender.com/api",
   timeout: 30000,
   withCredentials: true, // send cookies if needed
 });
