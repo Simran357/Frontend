@@ -11,7 +11,7 @@ const [openModel, setModel] = useState(false)
   
  const filteredUsers =
     selectedRole === "All"
-      ? users : users.filter(user => user.role === selectedRole);
+      ? users : users.filter(user => user?.role === selectedRole);
 
   const items = [
     {
@@ -46,7 +46,7 @@ const [openModel, setModel] = useState(false)
     try {
       const res = await axiosInstance.get("/registerroute/getuserController")
       if (res?.data?.success) {
-        setUser(res.data.data)
+        setUser(res?.data?.data)
       }
     } catch (error) {
       console.log("Error fetching user data:", error);
@@ -55,7 +55,7 @@ const [openModel, setModel] = useState(false)
 
   const handleMenuClick = async ({ key }, userId) => {
     console.log(" handleMenuClick called ");
-    const selectedItem = items.find(item => item.key === key);
+    const selectedItem = items.find(item => item?.key === key);
     const role = selectedItem?.role;
 
     console.log("Selected role:", role, "for user ID:", userId);
@@ -168,23 +168,23 @@ const [openModel, setModel] = useState(false)
                     {user.username?.charAt(0).toUpperCase()}
                   </div>
                   <div>
-                    <p className="font-semibold text-sm">{user.username}</p>
+                    <p className="font-semibold text-sm">{user?.username}</p>
                     <p className="text-xs text-slate-500">ID: {user._id}</p>
                   </div>
                 </td>
 
                 <td className="px-6 py-4 text-sm text-slate-600">
-                  {user.email}
+                  {user?.email}
                 </td>
 
                 <td className="px-6 py-4">
                   <span className="px-3 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-600">
-                    {user.role}
+                    {user?.role}
                   </span>
                 </td>
 
                 <td className="px-6 py-4 text-sm text-slate-500">
-                  {user.createdAt}
+                  {user?.createdAt}
                 </td>
 
                 <td className="px-6 py-4">

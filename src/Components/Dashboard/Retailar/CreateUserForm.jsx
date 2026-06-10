@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axiosInstance from "../Form/Utils/AxiosInstance";
+import axios from "axios";
 
 const CreateUserForm = ({ setModel, getUser }) => {
   const [formData, setFormData] = useState({
@@ -20,19 +21,31 @@ const CreateUserForm = ({ setModel, getUser }) => {
     });
   };
 
-  const handleCreateUser = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axiosInstance.post("/registerroute/createNewUser",formData);
-      if (res?.data?.success) {
-        alert(res.data.message);
-        getUser(); // refresh table
-        setModel(false); // close modal
-      }
-    } catch (error) {
-      console.log("Error:", error);
+const handleCreateUser = async (e) => {
+  e.preventDefault();
+
+  console.log("Form Submit");
+
+  try {
+    const res = await axios.post(
+  "http://localhost:5001/api/registerroute/createNewUser",
+      formData
+    );
+
+    console.log("API Response =>", res);
+
+    if (res?.data?.success) {
+      console.log("Success Block Entered");
+
+      alert(res?.data?.message);
+
+      setModel(false);
+      getUser();
     }
-  }; 
+  } catch (error) {
+    console.log("Catch Block =>", error);
+  }
+};
 
   return (
    <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">

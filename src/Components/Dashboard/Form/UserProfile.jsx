@@ -24,7 +24,7 @@ const UserProfileMenu = ({ username, role }) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [role,username]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");

@@ -130,9 +130,9 @@ const Wholesalerlayout = () => {
         username={
                 userData?.username ||
                 userData?.email ||
-                "User"
+                "Wholesaler"
               }
-              role={userData?.role || "Retailer"}
+              role={userData?.role || "Wholesaler"}
        />
      
      </div>

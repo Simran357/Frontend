@@ -39,7 +39,7 @@ const Header = () => {
       const [userData, setUserData] = useState(null);
     
       const { auth } = useContext(contextProvide);
-    
+    console.log("userData:", userData);
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -143,9 +143,9 @@ const Header = () => {
                             username={
                 userData?.username ||
                 userData?.email ||
-                "User"
+                "Admin"
               }
-              role={userData?.role || "Retailer"}
+              role={userData?.role || "Admin"}
                         />
 
                     </Box>
