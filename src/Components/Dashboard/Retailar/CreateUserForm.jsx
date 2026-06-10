@@ -27,10 +27,7 @@ const handleCreateUser = async (e) => {
   console.log("Form Submit");
 
   try {
-    const res = await axios.post(
-  "http://localhost:5001/api/registerroute/createNewUser",
-      formData
-    );
+    const res = await axiosInstance.post("/registerroute/createNewUser", formData);
 
     console.log("API Response =>", res);
 
@@ -55,12 +52,12 @@ const handleCreateUser = async (e) => {
       Add New User
     </div>
 
-    <form onSubmit={handleCreateUser} className="p-5 space-y-4">
+    <form className="p-5 space-y-4">
       <input name="username" placeholder="Full Name" onChange={handleChange}
         className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500"/>
       <input name="email" placeholder="Email" onChange={handleChange}
         className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500"/>
-      <input name="password" placeholder="Password" onChange={handleChange}
+      <input name="password" placeholder="Password"type="password"  onChange={handleChange}
         className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500"/>
       <input name="pharmacyName" placeholder="Pharmacy" onChange={handleChange}
         className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500"/>
@@ -86,7 +83,7 @@ const handleCreateUser = async (e) => {
           Cancel
         </button>
 
-        <button type="submit"
+        <button onClick={handleCreateUser}
           className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
           Create
         </button>

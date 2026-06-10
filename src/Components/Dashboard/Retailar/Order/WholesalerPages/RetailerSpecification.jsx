@@ -306,7 +306,7 @@ const RetailerSpecification = () => {
 
             {/* Find Wholesalers Button */}
             <button 
-              onClick={() => navigate("/FilterOutWholesaler")}
+              onClick={() => navigate("FilterOutWholesaler")}
               className='bg-green-500 hover:bg-green-600 rounded-lg px-4 w-full py-4 mt-4 font-bold text-md text-white transition-colors'
             >
               Find Best Wholesalers
