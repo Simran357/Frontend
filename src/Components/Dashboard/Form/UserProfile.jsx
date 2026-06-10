@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   User,
@@ -7,10 +7,14 @@ import {
   ChevronDown,
   ShieldCheck,
 } from "lucide-react";
+import { contextProvide } from "./Utils/Context/CommonContext";
 
 const UserProfileMenu = ({ username, role }) => {
   const [open, setOpen] = useState(false);
   const menuRef = useRef();
+   const { setAuth, setRole } = useContext(contextProvide);
+
+
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -24,12 +28,16 @@ const UserProfileMenu = ({ username, role }) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [role,username]);
+  }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location.href = "/";
-  };
+ const handleLogout = () => {
+  localStorage.removeItem("jwtToken");
+  localStorage.removeItem("role");
+  localStorage.removeItem("user");
+    setAuth(null);
+  setRole(null);
+navigate("/")
+};
 
   const initials = username?.charAt(0)?.toUpperCase() || "U";
 
