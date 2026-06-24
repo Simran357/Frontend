@@ -54,11 +54,9 @@ const { auth, userRoles } = useContext(contextProvide);
         alert("Only Card payment supported for now");
         return;
       }
+      // api calling for stripe
 console.log("AUTH:", auth);
 console.log("ROLE:", userRoles);
-console.log("WHOLESALER ID:", id);
-console.log("COURIER:", courier);
-console.log("CART:", cart);
       const orderId = Date.now();
       const formattedItems = cart.map((item) => ({
         productId: item._id,
@@ -75,8 +73,6 @@ console.log("CART:", cart);
 
         category: item.ProductCategory || null,
       }));
-
-      console.log("formattedItems", formattedItems);
   const orderData = {
   id: orderId,
   items: formattedItems,
@@ -90,7 +86,7 @@ console.log("CART:", cart);
   wholesalerId: id,
 
   orderedBy: auth,
-  orderedByRole: userRoles,
+  orderedByRole: userRoles?.role,
 
   customer: {
     name: customerName,
