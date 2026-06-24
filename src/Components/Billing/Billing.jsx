@@ -86,7 +86,7 @@ console.log("ROLE:", userRoles);
   wholesalerId: id,
 
   orderedBy: auth,
-  orderedByRole: userRoles?.role,
+  orderedByRole: userRoles,
 
   customer: {
     name: customerName,

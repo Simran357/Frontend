@@ -20,6 +20,12 @@ useEffect(() => {
   console.log("TOKEN:", localStorage.getItem("token"));
 }, []);
 useEffect(() => {
+  console.log(
+    "VERCEL ORDER:",
+    localStorage.getItem("orderData")
+  );
+}, []);
+useEffect(() => {
   const stored = localStorage.getItem("orderData");
 
   if (stored) {
