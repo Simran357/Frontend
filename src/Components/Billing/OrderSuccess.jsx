@@ -10,6 +10,7 @@ import { contextProvide } from "../Dashboard/Form/Utils/Context/CommonContext";
 
 const OrderSuccess = () => {
   const [order, setOrder] = useState(null);
+const [loading, setLoading] = useState(true);
   const [countdown, setCountdown] = useState(5);
   const navigate = useNavigate();
 const { userRoles } = useContext(contextProvide);
@@ -42,13 +43,15 @@ useEffect(() => {
   const stored = localStorage.getItem("orderData");
 
   if (stored) {
-    const parsed = JSON.parse(stored);
-
-    console.log("ORDER ROLE:", parsed.orderedByRole);
-    console.log("FULL ORDER:", parsed);
-
-    setOrder(parsed);
+    try {
+      const parsed = JSON.parse(stored);
+      setOrder(parsed);
+    } catch (e) {
+      console.log("Invalid orderData");
+    }
   }
+
+  setLoading(false);
 }, []);
 
   // Auto Redirect Timer
@@ -71,14 +74,22 @@ useEffect(() => {
   return () => clearTimeout(timer);
 }, [countdown, order]);
 
-  if (!order)
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-100">
-        <div className="bg-white shadow-lg rounded-3xl p-10 text-center">
-          <p className="text-gray-500 text-lg">No order found</p>
-        </div>
-      </div>
-    );
+ if (loading) {
+  return (
+    <div className="flex items-center justify-center h-screen">
+      Loading...
+    </div>
+  );
+}
+
+console.log("ORDER STATE:", order);
+if (!order) {
+  return (
+    <div className="flex items-center justify-center h-screen">
+      No order found
+    </div>
+  );
+}
 
   return (
 <div className="min-h-screen bg-linear-to-br from-green-50 via-white to-emerald-100 flex m-8 items-center justify-center px-4 py-10">
@@ -154,7 +165,7 @@ useEffect(() => {
             </div>
 
             <div className="space-y-3">
-              {order.items.map((item, index) => (
+           {order?.items?.map((item, index) => (
                 <div
                   key={index}
                   className="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex justify-between items-center hover:shadow-sm transition"
