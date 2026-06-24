@@ -115,7 +115,6 @@ console.log("ROLE:", userRoles);
 
       //  SAVE IN LOCALSTORAGE
       localStorage.setItem("orderData", JSON.stringify(orderData));
-      localStorage.setItem("orderData", JSON.stringify(orderData));
 
 console.log(
   "AFTER SAVE:",
