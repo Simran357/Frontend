@@ -15,6 +15,11 @@ const OrderSuccess = () => {
 const { userRoles } = useContext(contextProvide);
 
 useEffect(() => {
+  console.log("URL:", window.location.href);
+  console.log("ORDER:", localStorage.getItem("orderData"));
+  console.log("TOKEN:", localStorage.getItem("token"));
+}, []);
+useEffect(() => {
   const stored = localStorage.getItem("orderData");
 
   if (stored) {
