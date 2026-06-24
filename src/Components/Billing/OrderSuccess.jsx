@@ -13,39 +13,46 @@ const OrderSuccess = () => {
   const [countdown, setCountdown] = useState(5);
   const navigate = useNavigate();
 const { userRoles } = useContext(contextProvide);
-
 useEffect(() => {
+  console.log("ALL LOCAL STORAGE");
+  console.log(localStorage);
+}, []);
+useEffect(() => {
+  console.log("ORDER DATA:", localStorage.getItem("orderData"));
+}, []);
+useEffect(() => {
+  console.log("LOCAL STORAGE ORDER:", localStorage.getItem("orderData"));
+
   const stored = localStorage.getItem("orderData");
 
   if (stored) {
     const parsed = JSON.parse(stored);
-
-    console.log("ORDER ROLE:", parsed.orderedByRole);
-    console.log("FULL ORDER:", parsed);
-
     setOrder(parsed);
   }
 }, []);
-
   // Auto Redirect Timer
 useEffect(() => {
   if (!order) return;
 
   const timer = setInterval(() => {
-    setCountdown((prev) => prev - 1);
+    setCountdown(prev => {
+      if (prev <= 1) {
+        clearInterval(timer);
+        return 0;
+      }
+      return prev - 1;
+    });
   }, 1000);
 
   return () => clearInterval(timer);
 }, [order]);
 
 useEffect(() => {
-  if (countdown !== 0) return;
+  if (countdown > 0) return;
 
   if (order?.orderedByRole === "Retailer") {
     navigate("/Dashboard/Retailer");
-  }
-
-  if (order?.orderedByRole === "Wholesaler") {
+  } else if (order?.orderedByRole === "Wholesaler") {
     navigate("/Dashboard/Wholesaler");
   }
 }, [countdown, order, navigate]);
