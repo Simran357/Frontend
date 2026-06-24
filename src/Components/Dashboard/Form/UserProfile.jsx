@@ -34,8 +34,8 @@ const UserProfileMenu = ({ username, role }) => {
   localStorage.removeItem("jwtToken");
   localStorage.removeItem("role");
   localStorage.removeItem("user");
-    setAuth(null);
-  setRole(null);
+    setAuth("");
+  setRole("");
 navigate("/")
 };
 
