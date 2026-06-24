@@ -73,7 +73,11 @@ console.log("ROLE:", userRoles);
 
         category: item.ProductCategory || null,
       }));
-  const orderData = {
+      console.log("FINAL ORDER DATA", orderData);
+const role = localStorage.getItem("role");
+const userId = localStorage.getItem("userId");
+
+const orderData = {
   id: orderId,
   items: formattedItems,
   subtotal: Number(subtotal) || 0,
@@ -85,14 +89,14 @@ console.log("ROLE:", userRoles);
   paymentMethod,
   wholesalerId: id,
 
-  orderedBy: auth,
-  orderedByRole: userRoles,
+  orderedBy: userId,
+  orderedByRole: role,
 
   customer: {
     name: customerName,
-    phone: phone,
+    phone,
     email: customerEmail,
-    address: address,
+    address,
   },
 
   courier: {

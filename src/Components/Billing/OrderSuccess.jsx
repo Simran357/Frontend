@@ -14,13 +14,15 @@ const OrderSuccess = () => {
   const navigate = useNavigate();
 const { userRoles } = useContext(contextProvide);
 
- useEffect(() => {
+useEffect(() => {
   const stored = localStorage.getItem("orderData");
-
-  console.log("Stored Order Data:", JSON.parse(stored));
 
   if (stored) {
     const parsed = JSON.parse(stored);
+
+    console.log("ORDER ROLE:", parsed.orderedByRole);
+    console.log("FULL ORDER:", parsed);
+
     setOrder(parsed);
   }
 }, []);
@@ -36,13 +38,9 @@ const { userRoles } = useContext(contextProvide);
 console.log("orderedByRole =", order?.orderedByRole);
           // Navigate to wholesaler / retailer order history page
 
-if (order?.orderedByRole === "Retailer") {
+if (order?.orderedBy) {
   navigate("/Dashboard/Retailer");
-} else if (order?.orderedByRole === "Wholesaler") {
-  navigate("/Dashboard/Wholesaler");
-} else {
-  navigate("/Dashboard");
-}     }
+}   }
 
         return prev - 1;
       });
