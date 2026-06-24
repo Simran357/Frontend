@@ -7,8 +7,7 @@ const CommonContext = ({ children }) => {
 console.log("auth in context",auth)
 console.log("userrole in sontext", userRoles)
     useEffect(() => {
-  axiosInstance.get("/registerroute/me")
-    .then((res) => {
+  axiosInstance.get("/registerroute/me").then((res) => {
       const role = res?.data?.user?.role;
       const id = res?.data?.user?.id;
 
