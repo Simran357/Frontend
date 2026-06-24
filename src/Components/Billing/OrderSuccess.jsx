@@ -14,28 +14,9 @@ const OrderSuccess = () => {
   const navigate = useNavigate();
 const { userRoles } = useContext(contextProvide);
 
-// Auto Redirect Timer
-useEffect(() => {
-  if (!order) return;
 
-  const timer = setInterval(() => {
-    setCountdown((prev) => {
-      if (prev === 1) {
-        clearInterval(timer);
 
-        console.log("orderedByRole =", order?.orderedByRole);
 
-        if (order?.orderedByRole === "Retailer") {
-          navigate("/Dashboard/Retailer");
-        }
-      }
-
-      return prev - 1;
-    });
-  }, 1000);
-
-  return () => clearInterval(timer);
-}, [order, navigate]);
 useEffect(() => {
   const stored = localStorage.getItem("orderData");
 
@@ -48,6 +29,28 @@ useEffect(() => {
     setOrder(parsed);
   }
 }, []);
+useEffect(() => {
+  if (!order) return;
+
+  const timer = setInterval(() => {
+    setCountdown((prev) => prev - 1);
+  }, 1000);
+
+  return () => clearInterval(timer);
+}, [order]);
+
+
+useEffect(() => {
+  if (countdown !== 0) return;
+
+  if (order?.orderedByRole === "Retailer") {
+    navigate("/Dashboard/Retailer");
+  }
+
+  if (order?.orderedByRole === "Wholesaler") {
+    navigate("/Dashboard/Wholesaler");
+  }
+}, [countdown, order, navigate]);
 if (!order)
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-100">
