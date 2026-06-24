@@ -13,49 +13,49 @@ const OrderSuccess = () => {
   const [countdown, setCountdown] = useState(5);
   const navigate = useNavigate();
 const { userRoles } = useContext(contextProvide);
-useEffect(() => {
-  console.log("ALL LOCAL STORAGE");
-  console.log(localStorage);
-}, []);
-useEffect(() => {
-  console.log("ORDER DATA:", localStorage.getItem("orderData"));
-}, []);
-useEffect(() => {
-  console.log("LOCAL STORAGE ORDER:", localStorage.getItem("orderData"));
 
-  const stored = localStorage.getItem("orderData");
-
-  if (stored) {
-    const parsed = JSON.parse(stored);
-    setOrder(parsed);
-  }
-}, []);
-  // Auto Redirect Timer
+// Auto Redirect Timer
 useEffect(() => {
   if (!order) return;
 
   const timer = setInterval(() => {
-    setCountdown(prev => {
-      if (prev <= 1) {
+    setCountdown((prev) => {
+      if (prev === 1) {
         clearInterval(timer);
-        return 0;
+
+        console.log("orderedByRole =", order?.orderedByRole);
+
+        if (order?.orderedByRole === "Retailer") {
+          navigate("/Dashboard/Retailer");
+        }
       }
+
       return prev - 1;
     });
   }, 1000);
 
   return () => clearInterval(timer);
-}, [order]);
-
+}, [order, navigate]);
 useEffect(() => {
-  if (countdown > 0) return;
+  const stored = localStorage.getItem("orderData");
 
-  if (order?.orderedByRole === "Retailer") {
-    navigate("/Dashboard/Retailer");
-  } else if (order?.orderedByRole === "Wholesaler") {
-    navigate("/Dashboard/Wholesaler");
+  if (stored) {
+    const parsed = JSON.parse(stored);
+
+    console.log("ORDER ROLE:", parsed.orderedByRole);
+    console.log("FULL ORDER:", parsed);
+
+    setOrder(parsed);
   }
-}, [countdown, order, navigate]);
+}, []);
+if (!order)
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-slate-100">
+      <div className="bg-white shadow-lg rounded-3xl p-10 text-center">
+        <p className="text-gray-500 text-lg">No order found</p>
+      </div>
+    </div>
+  );
   if (!order)
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-100">
