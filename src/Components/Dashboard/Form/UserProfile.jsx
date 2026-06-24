@@ -8,12 +8,13 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { contextProvide } from "./Utils/Context/CommonContext";
+import { useNavigate } from "react-router";
 
 const UserProfileMenu = ({ username, role }) => {
   const [open, setOpen] = useState(false);
   const menuRef = useRef();
 const { setAuth, setUserRoles } = useContext(contextProvide);
-
+const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (e) => {
