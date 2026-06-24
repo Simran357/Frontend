@@ -15,7 +15,6 @@ const OrderSuccess = () => {
 const { userRoles } = useContext(contextProvide);
 
 
-
 useEffect(() => {
   console.log("ALL STORAGE");
 
@@ -28,8 +27,17 @@ useEffect(() => {
     );
   }
 }, []);
-
-
+useEffect(() => {
+  console.log("URL:", window.location.href);
+  console.log("ORDER:", localStorage.getItem("orderData"));
+  console.log("TOKEN:", localStorage.getItem("token"));
+}, []);
+useEffect(() => {
+  console.log(
+    "VERCEL ORDER:",
+    localStorage.getItem("orderData")
+  );
+}, []);
 useEffect(() => {
   const stored = localStorage.getItem("orderData");
 
