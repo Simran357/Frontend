@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import axiosInstance from '../Dashboard/Form/Utils/AxiosInstance';
+import { useContext } from "react";
+import { contextProvide } from "../Dashboard/Form/Utils/Context/CommonContext";
 
 const Billing = () => {
   const location = useLocation();
@@ -14,6 +16,8 @@ const Billing = () => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
 const [customerEmail,setCustomerEmail] = useState("")
+
+const { auth, userRoles } = useContext(contextProvide);
   // calculations
   const subtotal = cart.reduce(
     (acc, item) => acc + item.qty * (item.ProductPrice || 0),
@@ -68,34 +72,36 @@ const [customerEmail,setCustomerEmail] = useState("")
 
         category: item.ProductCategory || null,
       }));
-      const orderData = {
-        id: orderId,
-        items: formattedItems,
-        subtotal: Number(subtotal) || 0,
-        shipping: Number(shipping) || 0,
-        cgst: Number(cgst) || 0,
-        sgst: Number(sgst) || 0,
-        discount: Number(discount) || 0,
-        total: Number(total) || 0,
-        paymentMethod,
-        wholesalerId: id,
-        //  NEW
-        customer: {
-          name: customerName,
-          phone: phone,
-          email:customerEmail,
-          address: address,
+  const orderData = {
+  id: orderId,
+  items: formattedItems,
+  subtotal: Number(subtotal) || 0,
+  shipping: Number(shipping) || 0,
+  cgst: Number(cgst) || 0,
+  sgst: Number(sgst) || 0,
+  discount: Number(discount) || 0,
+  total: Number(total) || 0,
+  paymentMethod,
+  wholesalerId: id,
 
-        },
+  orderedBy: auth,
+  orderedByRole: userRoles,
 
-        courier: {
-          id: courier?._id,
-          name: courier?.name,
-          time: courier?.time,
-        },
-        date: new Date().toLocaleString()
-      };
+  customer: {
+    name: customerName,
+    phone: phone,
+    email: customerEmail,
+    address: address,
+  },
 
+  courier: {
+    id: courier?._id,
+    name: courier?.name,
+    time: courier?.time,
+  },
+
+  date: new Date().toLocaleString(),
+};
       console.log("Sending Data:", orderData);
 
       //api calling 

@@ -13,6 +13,7 @@ const OrderSuccess = () => {
   const [countdown, setCountdown] = useState(5);
   const navigate = useNavigate();
 const { userRoles } = useContext(contextProvide);
+
   useEffect(() => {
     const stored = localStorage.getItem("orderData");
 
@@ -39,13 +40,13 @@ const { userRoles } = useContext(contextProvide);
 
           // Navigate to wholesaler / retailer order history page
 
-if (userRoles === "Retailer") {
+if (order?.orderedByRole === "Retailer") {
   navigate("/Dashboard/Retailer");
-} else if (userRoles === "Wholesaler") {
+} else if (order?.orderedByRole === "Wholesaler") {
   navigate("/Dashboard/Wholesaler");
 } else {
   navigate("/Dashboard");
-}        }
+}     }
 
         return prev - 1;
       });
