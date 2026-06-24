@@ -52,26 +52,24 @@ useEffect(() => {
 }, []);
 
   // Auto Redirect Timer
-  useEffect(() => {
-    if (!order) return;
+useEffect(() => {
+  if (!order) return;
 
-    const timer = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev === 1) {
-          clearInterval(timer);
-console.log("orderedByRole =", order?.orderedByRole);
-          // Navigate to wholesaler / retailer order history page
+  if (countdown === 0) {
+    if (order?.orderedByRole === "Retailer") {
+      navigate("/Dashboard/Retailer", { replace: true });
+    } else if (order?.orderedByRole === "Wholesaler") {
+      navigate("/Dashboard/Wholesaler", { replace: true });
+    }
+    return;
+  }
 
-if (order?.orderedBy) {
-  navigate("/Dashboard/Retailer");
-}   }
+  const timer = setTimeout(() => {
+    setCountdown((prev) => prev - 1);
+  }, 1000);
 
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [order, navigate]);
+  return () => clearTimeout(timer);
+}, [countdown, order]);
 
   if (!order)
     return (
