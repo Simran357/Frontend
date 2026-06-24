@@ -28,27 +28,27 @@ useEffect(() => {
 }, []);
 
   // Auto Redirect Timer
-  useEffect(() => {
-    if (!order) return;
+useEffect(() => {
+  if (!order) return;
 
-    const timer = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev === 1) {
-          clearInterval(timer);
-console.log("orderedByRole =", order?.orderedByRole);
-          // Navigate to wholesaler / retailer order history page
+  const timer = setInterval(() => {
+    setCountdown((prev) => prev - 1);
+  }, 1000);
 
-if (order?.orderedBy) {
-  navigate("/Dashboard/Retailer");
-}   }
+  return () => clearInterval(timer);
+}, [order]);
 
-        return prev - 1;
-      });
-    }, 1000);
+useEffect(() => {
+  if (countdown !== 0) return;
 
-    return () => clearInterval(timer);
-  }, [order, navigate]);
+  if (order?.orderedByRole === "Retailer") {
+    navigate("/Dashboard/Retailer");
+  }
 
+  if (order?.orderedByRole === "Wholesaler") {
+    navigate("/Dashboard/Wholesaler");
+  }
+}, [countdown, order, navigate]);
   if (!order)
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-100">
