@@ -18,8 +18,7 @@ const OrderSuccess = () => {
       const parsed = JSON.parse(stored);
       setOrder(parsed);
 
-      axiosInstance
-        .post("/registerroute/orderController", parsed)
+      axiosInstance.post("/registerroute/orderController", parsed)
         .then(() => {
           console.log("Order saved in DB");
         })
@@ -37,7 +36,7 @@ const OrderSuccess = () => {
           clearInterval(timer);
 
           // Navigate to wholesaler / retailer order history page
-          navigate("/Dashboard/Retailer/RetailerOrderHistory");
+          navigate("/Dashboard");
         }
 
         return prev - 1;
