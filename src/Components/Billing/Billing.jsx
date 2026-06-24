@@ -121,7 +121,7 @@ console.log(
   "AFTER SAVE:",
   localStorage.getItem("orderData")
 );
-
+console.log(window.location.origin);
       window.location.href = res?.data?.url;
       return; // IMPORTANT
     } catch (error) {
