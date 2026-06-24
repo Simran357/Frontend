@@ -5,12 +5,14 @@ import { useNavigate } from "react-router-dom";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
+import { useContext } from "react";
+import { contextProvide } from "../Dashboard/Form/Utils/Context/CommonContext";
 
 const OrderSuccess = () => {
   const [order, setOrder] = useState(null);
   const [countdown, setCountdown] = useState(5);
   const navigate = useNavigate();
-
+const { userRoles } = useContext(contextProvide);
   useEffect(() => {
     const stored = localStorage.getItem("orderData");
 
@@ -36,8 +38,14 @@ const OrderSuccess = () => {
           clearInterval(timer);
 
           // Navigate to wholesaler / retailer order history page
-          navigate("/Dashboard");
-        }
+
+if (userRoles === "Retailer") {
+  navigate("/Dashboard/Retailer");
+} else if (userRoles === "Wholesaler") {
+  navigate("/Dashboard/Wholesaler");
+} else {
+  navigate("/Dashboard");
+}        }
 
         return prev - 1;
       });
