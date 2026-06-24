@@ -14,20 +14,16 @@ const OrderSuccess = () => {
   const navigate = useNavigate();
 const { userRoles } = useContext(contextProvide);
 
-  useEffect(() => {
-    const stored = localStorage.getItem("orderData");
+ useEffect(() => {
+  const stored = localStorage.getItem("orderData");
 
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      setOrder(parsed);
+  console.log("Stored Order Data:", JSON.parse(stored));
 
-      axiosInstance.post("/registerroute/orderController", parsed)
-        .then(() => {
-          console.log("Order saved in DB");
-        })
-        .catch((err) => console.log(err));
-    }
-  }, []);
+  if (stored) {
+    const parsed = JSON.parse(stored);
+    setOrder(parsed);
+  }
+}, []);
 
   // Auto Redirect Timer
   useEffect(() => {
@@ -37,7 +33,7 @@ const { userRoles } = useContext(contextProvide);
       setCountdown((prev) => {
         if (prev === 1) {
           clearInterval(timer);
-
+console.log("orderedByRole =", order?.orderedByRole);
           // Navigate to wholesaler / retailer order history page
 
 if (order?.orderedByRole === "Retailer") {

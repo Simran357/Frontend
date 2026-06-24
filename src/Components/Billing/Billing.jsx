@@ -55,7 +55,8 @@ const { auth, userRoles } = useContext(contextProvide);
         return;
       }
       // api calling for stripe
-
+console.log("AUTH:", auth);
+console.log("ROLE:", userRoles);
       const orderId = Date.now();
       const formattedItems = cart.map((item) => ({
         productId: item._id,
