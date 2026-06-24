@@ -55,23 +55,25 @@ const { auth, userRoles } = useContext(contextProvide);
         return;
       }
       // api calling for stripe
-const formattedItems = cart.map((item) => ({
-  productId: item._id,
-  name: item.ProductName,
-  price: Number(item.ProductPrice) || 0,
-  quantity: Number(item.qty) || 1,
-  image: item.image || "",
-  batch: item.ProductSku || null,
-  expiryDate: item.ProductExpiryDate
-    ? new Date(item.ProductExpiryDate)
-    : null,
-  category: item.ProductCategory || null,
-}));
+console.log("AUTH:", auth);
+console.log("ROLE:", userRoles);
+      const orderId = Date.now();
+      const formattedItems = cart.map((item) => ({
+        productId: item._id,
+        name: item.ProductName,
+        price: Number(item.ProductPrice) || 0,
+        quantity: Number(item.qty) || 1,
+        image: item.image || "",
 
-const role = localStorage.getItem("role");
-const userId = localStorage.getItem("userId");
+        //  ADD THESE (important)
+        batch: item.ProductSku || null,
+        expiryDate: item.ProductExpiryDate
+          ? new Date(item.ProductExpiryDate)
+          : null,
 
-const orderData = {
+        category: item.ProductCategory || null,
+      }));
+  const orderData = {
   id: orderId,
   items: formattedItems,
   subtotal: Number(subtotal) || 0,
@@ -83,49 +85,14 @@ const orderData = {
   paymentMethod,
   wholesalerId: id,
 
-  orderedBy: userId,
-  orderedByRole: role,
+  orderedBy: auth,
+  orderedByRole: userRoles?.role,
 
   customer: {
     name: customerName,
-    phone,
+    phone: phone,
     email: customerEmail,
-    address,
-  },
-
-  courier: {
-    id: courier?._id,
-    name: courier?.name,
-    time: courier?.time,
-  },
-
-  date: new Date().toLocaleString(),
-};
-
-console.log("FINAL ORDER DATA", orderData); // ✅ ab yaha
-const role = localStorage.getItem("role");
-const userId = localStorage.getItem("userId");
-
-const orderData = {
-  id: orderId,
-  items: formattedItems,
-  subtotal: Number(subtotal) || 0,
-  shipping: Number(shipping) || 0,
-  cgst: Number(cgst) || 0,
-  sgst: Number(sgst) || 0,
-  discount: Number(discount) || 0,
-  total: Number(total) || 0,
-  paymentMethod,
-  wholesalerId: id,
-
-  orderedBy: userId,
-  orderedByRole: role,
-
-  customer: {
-    name: customerName,
-    phone,
-    email: customerEmail,
-    address,
+    address: address,
   },
 
   courier: {
