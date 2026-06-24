@@ -12,8 +12,7 @@ import { contextProvide } from "./Utils/Context/CommonContext";
 const UserProfileMenu = ({ username, role }) => {
   const [open, setOpen] = useState(false);
   const menuRef = useRef();
-   const { setAuth, setRole } = useContext(contextProvide);
-
+const { setAuth, setUserRoles } = useContext(contextProvide);
 
 
   useEffect(() => {
@@ -34,8 +33,8 @@ const UserProfileMenu = ({ username, role }) => {
   localStorage.removeItem("jwtToken");
   localStorage.removeItem("role");
   localStorage.removeItem("user");
-    setAuth("");
-  setRole("");
+    setAuth(null);
+  setUserRoles(null);
 navigate("/")
 };
 
