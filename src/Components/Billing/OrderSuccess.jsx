@@ -14,9 +14,6 @@ const OrderSuccess = () => {
   const navigate = useNavigate();
 const { userRoles } = useContext(contextProvide);
 
-
-
-
 useEffect(() => {
   const stored = localStorage.getItem("orderData");
 
@@ -29,36 +26,29 @@ useEffect(() => {
     setOrder(parsed);
   }
 }, []);
-useEffect(() => {
-  if (!order) return;
 
-  const timer = setInterval(() => {
-    setCountdown((prev) => prev - 1);
-  }, 1000);
+  // Auto Redirect Timer
+  useEffect(() => {
+    if (!order) return;
 
-  return () => clearInterval(timer);
-}, [order]);
+    const timer = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev === 1) {
+          clearInterval(timer);
+console.log("orderedByRole =", order?.orderedByRole);
+          // Navigate to wholesaler / retailer order history page
 
+if (order?.orderedBy) {
+  navigate("/Dashboard/Retailer");
+}   }
 
-useEffect(() => {
-  if (countdown !== 0) return;
+        return prev - 1;
+      });
+    }, 1000);
 
-  if (order?.orderedByRole === "Retailer") {
-    navigate("/Dashboard/Retailer");
-  }
+    return () => clearInterval(timer);
+  }, [order, navigate]);
 
-  if (order?.orderedByRole === "Wholesaler") {
-    navigate("/Dashboard/Wholesaler");
-  }
-}, [countdown, order, navigate]);
-if (!order)
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-100">
-      <div className="bg-white shadow-lg rounded-3xl p-10 text-center">
-        <p className="text-gray-500 text-lg">No order found</p>
-      </div>
-    </div>
-  );
   if (!order)
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-100">
